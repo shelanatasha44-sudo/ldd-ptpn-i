@@ -44,6 +44,11 @@
       if(type==='doughnut'||type==='pie'){an.animateRotate=true;an.animateScale=true;}
       o.animation=an;
     }
+    if(type==='doughnut'||type==='pie'||type==='polarArea'){
+      o.plugins=o.plugins||{};o.plugins.tooltip=o.plugins.tooltip||{};var cb=o.plugins.tooltip.callbacks=o.plugins.tooltip.callbacks||{};
+      if(!cb.footer)cb.footer=function(items){try{var it=items[0],d=it.dataset.data,tot=0;for(var i=0;i<d.length;i++){if(it.chart.getDataVisibility(i))tot+=(+d[i]||0);}
+        if(!tot)return '';return ((+it.raw||0)/tot*100).toFixed(1).replace('.',',')+'% dari total';}catch(e){return '';}};
+    }
     var oh=o.onHover;o.onHover=function(ev,els,chart){try{(chart||this).canvas.style.cursor=els&&els.length?'pointer':'';}catch(x){}if(oh)return oh.apply(this,arguments);};
   }
   var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){es.forEach(function(e){
@@ -55,6 +60,11 @@
   Chart.register({id:'wowGlow',
     beforeDatasetDraw:function(chart){var c=chart.ctx;c.save();c.shadowColor='rgba(20,36,72,.26)';c.shadowBlur=12;c.shadowOffsetY=4;},
     afterDatasetDraw:function(chart){chart.ctx.restore();}});
+  Chart.register({id:'wowCross',afterDatasetsDraw:function(chart){
+      var t=chart.config.type;if(t!=='bar'&&t!=='line')return;var a=chart.getActiveElements&&chart.getActiveElements();if(!a||!a.length)return;
+      var el=a[0].element,ar=chart.chartArea,c=chart.ctx;if(!el||!ar)return;c.save();c.setLineDash([5,5]);c.lineWidth=1.2;c.strokeStyle='rgba(176,141,87,.85)';c.beginPath();
+      if(chart.options.indexAxis==='y'){c.moveTo(ar.left,el.y);c.lineTo(ar.right,el.y);}else{c.moveTo(el.x,ar.top);c.lineTo(el.x,ar.bottom);}
+      c.stroke();c.restore();}});
   try{var tp=Chart.defaults.plugins.tooltip;tp.backgroundColor='rgba(15,27,56,.96)';tp.borderColor='#D4B373';tp.borderWidth=1;tp.padding=12;tp.cornerRadius=10;tp.caretSize=7;tp.titleColor='#F3E3BD';tp.bodyColor='#fff';tp.boxPadding=5;tp.usePointStyle=true;
       Chart.defaults.plugins.legend.labels.usePointStyle=true;}catch(e){}
   var _C=Chart;
@@ -10507,7 +10517,20 @@ section:not(.ldd-locked) .ldd-tablock{display:none!important}
   background:linear-gradient(105deg,transparent 35%,rgba(212,179,115,.20) 50%,transparent 65%);background-size:260% 100%;background-position:120% 0;z-index:2}
 .chart.wow-in::before{animation:wowSweep 1.6s .25s ease-out 1}
 @keyframes wowSweep{0%{opacity:1;background-position:120% 0}100%{opacity:0;background-position:-60% 0}}
-.wow-live{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:700;letter-spacing:.08em;color:#9A7B2F;position:absolute;top:-17px;right:6px;z-index:3;pointer-events:none;opacity:.9}
+.wow-live{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:700;letter-spacing:.08em;color:#9A7B2F;position:absolute;top:-17px;right:6px;z-index:3;pointer-events:auto;opacity:.95}
+.wow-live button{all:unset;cursor:pointer;width:20px;height:20px;border-radius:6px;display:inline-grid;place-items:center;font-size:13px;line-height:1;color:#1F3864;background:rgba(212,179,115,.22);transition:background .2s,transform .2s}
+.wow-live button:hover{background:#D4B373;transform:scale(1.12)}
+.wow-live button:focus-visible{outline:2px solid #1F3864;outline-offset:2px}
+.chart::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:14px;opacity:0;transition:opacity .3s;z-index:1;background:radial-gradient(220px circle at var(--wx,50%) var(--wy,50%),rgba(212,179,115,.16),transparent 70%)}
+.chart:hover::after{opacity:1}
+#wowStage{position:fixed;inset:0;z-index:99990;display:none;align-items:center;justify-content:center;background:rgba(10,18,40,.78);backdrop-filter:blur(6px);padding:4vh 4vw}
+#wowStage.on{display:flex;animation:wowFade .25s ease both}
+@keyframes wowFade{from{opacity:0}to{opacity:1}}
+#wowStage .wow-box{position:relative;width:min(1280px,92vw);height:min(760px,86vh);background:#fffdf8;border-radius:18px;padding:34px 26px 22px;box-shadow:0 30px 80px rgba(0,0,0,.45);border:1px solid #D4B373}
+#wowStage .wow-box>.chart{width:100%!important;height:100%!important;min-height:0!important;max-height:none!important;animation:none!important}
+#wowStage .wow-x{all:unset;cursor:pointer;position:absolute;top:8px;right:12px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:18px;color:#fff;background:#1F3864}
+#wowStage .wow-x:hover{background:#9A7B2F}
+#wowStage .wow-live{top:-24px;right:46px}
 .wow-live i{width:7px;height:7px;border-radius:50%;background:#2e9e62;box-shadow:0 0 0 0 rgba(46,158,98,.55);animation:wowPing 1.8s ease-out infinite}
 @keyframes wowPing{0%{box-shadow:0 0 0 0 rgba(46,158,98,.55)}100%{box-shadow:0 0 0 10px rgba(46,158,98,0)}}
 .wow-pop{animation:wowPop .7s cubic-bezier(.2,.9,.3,1.3) 1}
@@ -10537,7 +10560,22 @@ section:not(.ldd-locked) .ldd-tablock{display:none!important}
       if(el.children.length===0&&/^\s*[±]?\s*[0-9]/.test(el.textContent)&&!el._wowObs){el._wowObs=1;io.observe(el);}});}
   // penanda kecil "interaktif" pada grafik
   function badge(){document.querySelectorAll('.chart').forEach(function(b){if(b.querySelector('.wow-live')||!b.querySelector('canvas'))return;
-      var s=document.createElement('span');s.className='wow-live';s.setAttribute('aria-hidden','true');s.innerHTML='<i></i>INTERAKTIF';b.appendChild(s);});}
+      var s=document.createElement('span');s.className='wow-live';s.innerHTML='<i></i><span aria-hidden="true">INTERAKTIF</span><button type="button" data-wow="replay" title="Putar ulang animasi grafik" aria-label="Putar ulang animasi grafik">&#8635;</button><button type="button" data-wow="zoom" title="Perbesar grafik" aria-label="Perbesar grafik">&#10530;</button>';b.appendChild(s);
+      b.addEventListener('mousemove',function(e){var r=b.getBoundingClientRect();b.style.setProperty('--wx',(e.clientX-r.left)+'px');b.style.setProperty('--wy',(e.clientY-r.top)+'px');});});}
+  function chartOf(box){var c=box.querySelector('canvas');return c&&(c._wowChart||(window.Chart&&Chart.getChart&&Chart.getChart(c)));}
+  var stage,holder,home;
+  function closeStage(){if(!stage||!stage.classList.contains('on'))return;var box=holder.querySelector('.chart');
+    if(box&&home){home.parentNode.insertBefore(box,home);home.parentNode.removeChild(home);home=null;var ch=chartOf(box);if(ch){try{ch.resize();}catch(e){}}}
+    stage.classList.remove('on');}
+  function openStage(box){if(!stage){stage=document.createElement('div');stage.id='wowStage';stage.innerHTML='<div class="wow-box"><button type="button" class="wow-x" title="Tutup" aria-label="Tutup">&times;</button></div>';document.body.appendChild(stage);holder=stage.firstChild;
+      stage.addEventListener('click',function(e){if(e.target===stage||e.target.classList.contains('wow-x'))closeStage();});
+      document.addEventListener('keydown',function(e){if(e.key==='Escape')closeStage();});}
+    home=document.createComment('wow-home');box.parentNode.insertBefore(home,box);holder.appendChild(box);stage.classList.add('on');
+    var ch=chartOf(box);if(ch){try{ch.resize();ch._wowDone=false;ch.reset();ch.update();}catch(e){}}}
+  document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.wow-live button');if(!b)return;e.preventDefault();e.stopPropagation();
+    var box=b.closest('.chart');if(!box)return;
+    if(b.getAttribute('data-wow')==='replay'){var ch=chartOf(box);if(ch){try{ch._wowDone=false;ch.reset();ch.update();}catch(x){}}}
+    else{if(stage&&stage.classList.contains('on'))closeStage();else openStage(box);}},true);
   // batang progres mengisi ulang saat terlihat
   function bars(){if(!('IntersectionObserver' in window)||RM)return;var bo=new IntersectionObserver(function(es){es.forEach(function(e){
       var el=e.target;if(e.isIntersecting&&!el._wowB){el._wowB=1;var w=el.style.width||getComputedStyle(el).width;var had=el.style.width;el.style.width='0';requestAnimationFrame(function(){requestAnimationFrame(function(){el.style.width=w;setTimeout(function(){el.style.width=had;},1800);});});}});},{threshold:.5});
