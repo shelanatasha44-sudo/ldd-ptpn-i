@@ -80,14 +80,18 @@
       var n=s.ticks.length;if(n<2)return;c.save();c.fillStyle='rgba(176,141,87,.07)';for(var i=0;i<n;i+=2){var p=s.getPixelForTick(i),p2=s.getPixelForTick(Math.min(i+1,n-1)),st=Math.abs(p2-p)||((hz?a.height:a.width)/n);
         if(hz)c.fillRect(a.left,p-st/2,a.width,st);else c.fillRect(p-st/2,a.top,st,a.height);}c.restore();},
     afterDatasetDraw:function(chart,args){var m=args.meta,c=chart.ctx;if(!m||!m.data)return;
+      var act=chart.getActiveElements?chart.getActiveElements():[],dimC=(document.documentElement.getAttribute('data-theme')==='dark')?'rgba(22,28,42,.62)':'rgba(252,247,236,.66)';function isA(el){for(var q=0;q<act.length;q++){if(act[q].element===el)return true;}return false;}
       if(m.type==='bar'){m.data.forEach(function(el){var p=el.getProps(['x','y','base','width','height','horizontal']);if(p.x==null||p.y==null||p.base==null)return;var x,y,w,h,g;
           if(p.horizontal){x=Math.min(p.x,p.base);w=Math.abs(p.x-p.base);y=p.y-p.height/2;h=p.height;g=c.createLinearGradient(0,y,0,y+h);}
           else{x=p.x-p.width/2;w=p.width;y=Math.min(p.y,p.base);h=Math.abs(p.y-p.base);g=c.createLinearGradient(x,0,x+w,0);}
           if(!(w>1&&h>1))return;g.addColorStop(0,'rgba(255,255,255,.34)');g.addColorStop(.42,'rgba(255,255,255,.04)');g.addColorStop(.6,'rgba(0,0,0,0)');g.addColorStop(1,'rgba(0,0,0,.20)');
-          c.save();rr(c,x,y,w,h,7);c.clip();c.fillStyle=g;c.fillRect(x,y,w,h);c.restore();});}
+          c.save();rr(c,x,y,w,h,7);c.clip();c.fillStyle=g;c.fillRect(x,y,w,h);if(act.length&&!isA(el)){c.fillStyle=dimC;c.fillRect(x,y,w,h);}c.restore();});}
       else if(m.type==='doughnut'||m.type==='pie'){m.data.forEach(function(el){var p=el.getProps(['x','y','startAngle','endAngle','innerRadius','outerRadius']);if(!(p.outerRadius>2)||p.endAngle-p.startAngle<=0)return;
           var g=c.createRadialGradient(p.x,p.y,Math.max(p.innerRadius,0),p.x,p.y,p.outerRadius);g.addColorStop(0,'rgba(0,0,0,.22)');g.addColorStop(.22,'rgba(0,0,0,0)');g.addColorStop(.55,'rgba(255,255,255,.22)');g.addColorStop(.8,'rgba(255,255,255,0)');g.addColorStop(1,'rgba(0,0,0,.16)');
-          c.save();c.beginPath();c.arc(p.x,p.y,p.outerRadius,p.startAngle,p.endAngle);c.arc(p.x,p.y,Math.max(p.innerRadius,0),p.endAngle,p.startAngle,true);c.closePath();c.fillStyle=g;c.fill();c.restore();});}},
+          c.save();c.beginPath();c.arc(p.x,p.y,p.outerRadius,p.startAngle,p.endAngle);c.arc(p.x,p.y,Math.max(p.innerRadius,0),p.endAngle,p.startAngle,true);c.closePath();c.fillStyle=g;c.fill();if(act.length&&!isA(el)){c.fillStyle=dimC;c.fill();}c.restore();});}},
+    afterDatasetsDraw:function(chart){var k=chart._wowSh;if(k==null)return;var a=chart.chartArea,c=chart.ctx;if(!a)return;var W=chart.width,bw=Math.max(90,W*.16),x=-bw+(W+bw*2)*k;
+      var g=c.createLinearGradient(x-bw,0,x+bw,0);g.addColorStop(0,'rgba(255,255,255,0)');g.addColorStop(.5,'rgba(255,246,214,.55)');g.addColorStop(1,'rgba(255,255,255,0)');
+      c.save();c.globalCompositeOperation='source-atop';c.transform(1,0,-.35,1,0,0);c.fillStyle=g;c.fillRect(x-bw,-chart.height,bw*2+chart.height,chart.height*3);c.restore();},
     afterDraw:function(chart){var t=chart.config.type;if(t!=='doughnut')return;var m=chart.getDatasetMeta(0);if(!m||!m.data||!m.data.length)return;var e=m.data[0],c=chart.ctx,R=e.outerRadius,r=e.innerRadius,x=e.x,y=e.y;if(!(R>20))return;
       c.save();c.strokeStyle='rgba(176,141,87,.75)';c.lineWidth=1;c.beginPath();c.arc(x,y,R+6,0,Math.PI*2);c.stroke();if(r>12){c.beginPath();c.arc(x,y,r-6,0,Math.PI*2);c.stroke();}
       if(R>70){for(var i=0;i<60;i++){var a=i*Math.PI/30,L=i%5===0?6:3;c.globalAlpha=i%5===0?.8:.4;c.beginPath();c.moveTo(x+Math.cos(a)*(R+9),y+Math.sin(a)*(R+9));c.lineTo(x+Math.cos(a)*(R+9+L),y+Math.sin(a)*(R+9+L));c.stroke();}}
@@ -100,8 +104,11 @@
         c.fillStyle=navy;c.fillText(big,x,y-4);c.font='600 10.5px '+(Chart.defaults.font.family||'sans-serif');c.fillStyle='#9A7B2F';var mw=r*1.5;while(small.length>4&&c.measureText(small.toUpperCase()).width>mw){small=small.slice(0,-2);}
         c.fillText(small.toUpperCase(),x,y+fs*.62+4);c.strokeStyle='rgba(176,141,87,.6)';c.beginPath();c.moveTo(x-16,y-fs*.62-4);c.lineTo(x+16,y-fs*.62-4);c.stroke();}
       c.restore();}});
+  function shine(ch){if(RM||!ch||!ch.canvas||!ch.canvas.isConnected||ch._wowShOn||!ch._wowDone)return;var box=ch.canvas.closest('.chart');if(!box||!box.classList.contains('wow-in'))return;
+    if(ch.getActiveElements&&ch.getActiveElements().length)return;ch._wowShOn=1;var t0=null;function st(ts){if(t0===null)t0=ts;var k=(ts-t0)/1100;if(k>=1||!ch.canvas.isConnected){ch._wowSh=null;ch._wowShOn=0;try{ch.draw();}catch(e){}return;}ch._wowSh=k;try{ch.draw();}catch(e){ch._wowSh=null;ch._wowShOn=0;return;}requestAnimationFrame(st);}requestAnimationFrame(st);}
+  var live=[];setInterval(function(){live=live.filter(function(c){return c.canvas&&c.canvas.isConnected;});live.forEach(function(c,i){setTimeout(function(){shine(c);},i*260);});},6500);
   var _C=Chart;
-  function W(item,cfg){try{tweak(cfg);}catch(e){}var ch=new _C(item,cfg);try{ch._wowT=Date.now();ch.canvas._wowChart=ch;if(io)io.observe(ch.canvas);}catch(e){}return ch;}
+  function W(item,cfg){try{tweak(cfg);}catch(e){}var ch=new _C(item,cfg);try{ch._wowT=Date.now();ch.canvas._wowChart=ch;live.push(ch);if(io)io.observe(ch.canvas);}catch(e){}return ch;}
   Object.setPrototypeOf(W,_C);W.prototype=_C.prototype;window.Chart=W;
 })();
 </script>
@@ -10576,6 +10583,8 @@ section:not(.ldd-locked) .ldd-tablock{display:none!important}
 html[data-theme="dark"] .chart{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.015));border-color:rgba(214,178,106,.38);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.10),inset 0 0 0 5px rgba(214,178,106,.08),0 14px 30px -18px #000}
 #wowStage .wow-box>.chart{border:0;box-shadow:none;background:none;padding:0}
+#igxPop:not(.show){opacity:0!important;transform:scale(.6) translateY(8px)!important;pointer-events:none!important;visibility:hidden!important}
+.wow-j{text-align:justify!important;text-justify:inter-word}
 @media print{.wow-live{display:none}}
 </style>
 <script id="wow-post">
@@ -10599,7 +10608,7 @@ html[data-theme="dark"] .chart{background:linear-gradient(180deg,rgba(255,255,25
       if(el.children.length===0&&/^\s*[±]?\s*[0-9]/.test(el.textContent)&&!el._wowObs){el._wowObs=1;io.observe(el);}});}
   // penanda kecil "interaktif" pada grafik
   function badge(){document.querySelectorAll('.chart').forEach(function(b){if(b.querySelector('.wow-live')||!b.querySelector('canvas'))return;
-      var s=document.createElement('span');s.className='wow-live';s.innerHTML='<i></i><span aria-hidden="true">INTERAKTIF</span><button type="button" data-wow="replay" title="Putar ulang animasi grafik" aria-label="Putar ulang animasi grafik">&#8635;</button><button type="button" data-wow="zoom" title="Perbesar grafik" aria-label="Perbesar grafik">&#10530;</button>';b.appendChild(s);
+      var s=document.createElement('span');s.className='wow-live';s.innerHTML='<i></i><span aria-hidden="true">INTERAKTIF</span><button type="button" data-wow="replay" title="Putar ulang animasi grafik" aria-label="Putar ulang animasi grafik">&#8635;</button><button type="button" data-wow="save" title="Simpan gambar grafik" aria-label="Simpan gambar grafik">&#10515;</button><button type="button" data-wow="zoom" title="Perbesar grafik" aria-label="Perbesar grafik">&#10530;</button>';b.appendChild(s);
       b.addEventListener('mousemove',function(e){var r=b.getBoundingClientRect();b.style.setProperty('--wx',(e.clientX-r.left)+'px');b.style.setProperty('--wy',(e.clientY-r.top)+'px');});});}
   function chartOf(box){var c=box.querySelector('canvas');return c&&(c._wowChart||(window.Chart&&Chart.getChart&&Chart.getChart(c)));}
   var stage,holder,home;
@@ -10614,12 +10623,17 @@ html[data-theme="dark"] .chart{background:linear-gradient(180deg,rgba(255,255,25
   document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.wow-live button');if(!b)return;e.preventDefault();e.stopPropagation();
     var box=b.closest('.chart');if(!box)return;
     if(b.getAttribute('data-wow')==='replay'){var ch=chartOf(box);if(ch){try{ch._wowDone=false;ch.reset();ch.update();}catch(x){}}}
+    else if(b.getAttribute('data-wow')==='save'){var cv=box.querySelector('canvas');if(cv){try{var o=document.createElement('canvas');o.width=cv.width;o.height=cv.height;var x2=o.getContext('2d');x2.fillStyle=(document.documentElement.getAttribute('data-theme')==='dark')?'#161c2a':'#fffdf8';x2.fillRect(0,0,o.width,o.height);x2.drawImage(cv,0,0);var a=document.createElement('a');a.download=(cv.id||'grafik')+'.png';a.href=o.toDataURL('image/png');document.body.appendChild(a);a.click();a.remove();}catch(x){}}}
     else{if(stage&&stage.classList.contains('on'))closeStage();else openStage(box);}},true);
+  // rata kanan kiri untuk teks yang semula rata kiri
+  var jt=null;function just(){jt=null;document.querySelectorAll('p,li,td,dd,blockquote,figcaption,.igx-popB,.igx-detail,.igx-popRow,.hint,.small-note').forEach(function(el){if(el._wowJ||el.closest('.wow-live,button,nav,header'))return;el._wowJ=1;var ta=getComputedStyle(el).textAlign;if(ta==='left'||ta==='start')el.classList.add('wow-j');});}
+  function justQ(){if(!jt)jt=setTimeout(just,250);}
+  try{new MutationObserver(justQ).observe(document.body,{childList:true,subtree:true});}catch(e){}
   // batang progres mengisi ulang saat terlihat
   function bars(){if(!('IntersectionObserver' in window)||RM)return;var bo=new IntersectionObserver(function(es){es.forEach(function(e){
       var el=e.target;if(e.isIntersecting&&!el._wowB){el._wowB=1;var w=el.style.width||getComputedStyle(el).width;var had=el.style.width;el.style.width='0';requestAnimationFrame(function(){requestAnimationFrame(function(){el.style.width=w;setTimeout(function(){el.style.width=had;},1800);});});}});},{threshold:.5});
     document.querySelectorAll('.kinetic-bar-fill').forEach(function(el){bo.observe(el);});}
-  function go(){try{scan();}catch(e){}try{badge();}catch(e){}try{bars();}catch(e){}}
+  function go(){try{just();}catch(e){}try{scan();}catch(e){}try{badge();}catch(e){}try{bars();}catch(e){}}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go();
   setTimeout(go,1500);
 })();
