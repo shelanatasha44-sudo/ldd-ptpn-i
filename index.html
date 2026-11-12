@@ -6635,12 +6635,22 @@ section:not(.ldd-locked) .ldd-tablock{display:none!important}
         </div>
         <span class="small">Sumber: Lampiran LDD IGT 12 November 2026 (Slide 21 sampai 23 PPT)</span>
       </div>
+      <div class="igx-seg lp-seg" role="group" aria-label="Pilih bagian lampiran">
+        <button type="button" data-lp="0" aria-pressed="true">1 · Lahan</button>
+        <button type="button" data-lp="1" aria-pressed="false">2 · Prosedur</button>
+        <button type="button" data-lp="2" aria-pressed="false">3 · Dua tahun</button>
+        <button type="button" data-lp="3" aria-pressed="false">4 · Kerugian BUMN</button>
+        <button type="button" class="lp-next" data-lp-next>Berikutnya →</button>
+      </div>
+      <div class="lp-pane" data-pane="0">
       <p>Lampiran LDD menjawab tiga pertanyaan dari rapat sebelumnya. Lahan mana yang paling siap dimohonkan HGU, bagaimana urutan langkah sejak pembubaran sampai likuidasi selesai, dan bagaimana kedudukan pengambil keputusan bila timbul kerugian. Lampiran disusun hanya berdasarkan dokumen yang diterima sampai 6 November 2026, sehingga keadaan lahan perlu dipastikan di lapangan.</p>
 
       <h4 class="igx-h4">Lampiran I · Empat kelompok lahan, dari yang paling siap <span class="small">(klik batang)</span></h4>
       <div class="chart igx-chart" style="height:250px"><canvas id="cLampLahan" role="img" aria-label="Luas empat kelompok lahan menurut urutan kesiapan permohonan HGU"></canvas></div>
       <div class="igx-detail" id="lampLahanDetail" aria-live="polite">Seluruh 4.266,00 ha sudah dibayar ganti ruginya. Klik batang untuk membaca penilaian tiap kelompok.</div>
 
+      </div>
+      <div class="lp-pane" data-pane="1" hidden>
       <h4 class="igx-h4">Lampiran II · 28 langkah dalam empat bagian <span class="small">(klik batang)</span></h4>
       <div class="lp-rail" role="group" aria-label="Empat tanggal acuan">
         <div class="lp-node" data-l="P"><b>Keputusan pembubaran</b><span>Hari KPPS pembubaran ditandatangani (langkah 1). Akta dan pemberitahuan kepada Menteri dihitung 30 hari sejak tanggal ini.</span></div>
@@ -6648,9 +6658,11 @@ section:not(.ldd-locked) .ldd-tablock{display:none!important}
         <div class="lp-node" data-l="R"><b>Pengumuman rencana pembagian</b><span>Rencana pembagian kekayaan diumumkan (langkah 12). Keberatan kreditor diterima 60 hari sejak tanggal ini.</span></div>
         <div class="lp-node" data-l="T"><b>Pertanggungjawaban diterima</b><span>Pemegang saham menerima pertanggungjawaban likuidator (langkah 20). Hasil akhir diberitahukan kepada Menteri 30 hari sejak tanggal ini.</span></div>
       </div>
-      <div class="chart igx-chart" style="height:230px"><canvas id="cLampLangkah" role="img" aria-label="Jumlah langkah pada setiap bagian prosedur"></canvas></div>
+      <div class="chart igx-chart" style="height:190px"><canvas id="cLampLangkah" role="img" aria-label="Jumlah langkah pada setiap bagian prosedur"></canvas></div>
       <div class="igx-detail" id="lampLangkahDetail" aria-live="polite">Dua masa tunggu 60 hari bagi kreditor ditetapkan undang-undang dan tidak dapat dipersingkat. Klik batang untuk melihat isi tiap bagian.</div>
 
+      </div>
+      <div class="lp-pane" data-pane="2" hidden>
       <h4 class="igx-h4">Apabila likuidator belum selesai dalam dua tahun</h4>
       <div class="table-wrap"><table class="igx-t lp-t">
         <thead><tr><th>Hal</th><th>Akibat setelah dua tahun</th><th>Dasar hukum</th></tr></thead>
@@ -6664,6 +6676,8 @@ section:not(.ldd-locked) .ldd-tablock{display:none!important}
         </tbody>
       </table></div>
 
+      </div>
+      <div class="lp-pane" data-pane="3" hidden>
       <h4 class="igx-h4">Lampiran III · Kerugian BUMN dan perlindungan pengambil keputusan</h4>
       <div class="igx-g3">
         <div class="sheet"><span class="igx-q">Pasal 97 ayat (5) UU PT</span><h3>Empat syarat perlindungan Direksi</h3><p>Direksi tidak bertanggung jawab atas kerugian bila tidak bersalah atau lalai, mengurus dengan itikad baik dan hati-hati, tidak mempunyai benturan kepentingan, dan sudah mengambil tindakan untuk mencegah kerugian.</p></div>
@@ -6674,8 +6688,8 @@ section:not(.ldd-locked) .ldd-tablock{display:none!important}
         <div class="sheet"><span class="igx-q">Pasal 2 dan Pasal 3 UU Tipikor</span><h3>Unsur pidana tidak terpenuhi</h3><p>Keputusan oleh pihak yang berwenang, sesuai prosedur, dan tanpa benturan kepentingan tidak memenuhi unsur pidana, walaupun hasilnya tidak menguntungkan.</p></div>
       </div>
       <p class="hint">Lampiran ini murni kajian hukum. Hitungan nilai, biaya, dan pajak menjadi bagian tim keuangan.</p>
+      </div>
     </div>
-
     <p class="small" style="margin-top:18px">Sumber: Draf 2 Legal Due Diligence PT Industri Gula Tinanggea, data per 6 November 2026 (batas akhir pemenuhan data), diserahkan 12 November 2026 (191 halaman dwibahasa). Draf 2 menggantikan seluruh versi sebelumnya; dokumen yang diterima setelah 6 November 2026 dinilai dalam Ver 3. Rahasia dan istimewa.</p>
   </div>
 </section>
@@ -10680,6 +10694,11 @@ html[data-theme="dark"] .lp-node{background:linear-gradient(180deg,rgba(255,255,
 .lp-ok{background:#e3f0e7;color:#1f6b3f}.lp-hit{background:#f7e2e0;color:#8e2c3a}
 html[data-theme="dark"] .lp-ok{background:rgba(92,199,149,.18);color:#8fe0b8}html[data-theme="dark"] .lp-hit{background:rgba(229,115,115,.18);color:#f0a3a3}
 @media (prefers-reduced-motion: reduce){.lp-node::after{animation:none}}
+.lp-seg{position:sticky;top:0;z-index:3}
+.lp-seg .lp-next{margin-left:auto;background:var(--navy)!important;color:#fff!important;border-color:var(--navy)!important}
+html[data-theme="dark"] .lp-seg .lp-next{color:#14161a!important}
+.lp-pane{animation:wowIn .5s cubic-bezier(.2,.8,.2,1) both}
+.lp-pane[hidden]{display:none}
 @media print{.wow-live{display:none}}
 </style>
 <script id="wow-post">
@@ -10748,20 +10767,27 @@ html[data-theme="dark"] .lp-ok{background:rgba(92,199,149,.18);color:#8fe0b8}htm
     ['Bagian D, pajak, perizinan, dan lahan (5 langkah).','Penghapusan NPWP, penegasan tidak ada karyawan dan izin yang aktif, permohonan HGU oleh PTPN I, serta pemanfaatan lahan setelah hak diberikan.']];
   function show(id,a){var d=document.getElementById(id);if(!d)return;d.innerHTML='<b>'+a[0]+'</b> '+a[1];d.classList.remove('pop');void d.offsetWidth;d.classList.add('pop');}
   function nf(v){return v.toLocaleString('id-ID',{minimumFractionDigits:2,maximumFractionDigits:2});}
+  var done={};
   function build(){
-    if(built||typeof Chart==='undefined')return;var a=document.getElementById('cLampLahan'),b=document.getElementById('cLampLangkah');
-    if(!a||!b||a.offsetParent===null)return;built=true;
+    if(typeof Chart==='undefined')return;var a=document.getElementById('cLampLahan'),b=document.getElementById('cLampLangkah');
+    if(a&&!done.a&&a.offsetParent!==null){done.a=1;
     new Chart(a,{type:'bar',data:{labels:['1. Dalam proses sertifikasi HGU','2. Kerja sama PT Baula','3. Diokupasi PT CAM','4. Belum teridentifikasi'],
       datasets:[{data:[971.78,23.74,312.83,2957.65],backgroundColor:['#2F5597','#5B7DB8','#B08D57','#8E97AB'],borderRadius:7,maxBarThickness:34}]},
       options:{indexAxis:'y',maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return nf(c.raw)+' ha ('+(c.raw/4266*100).toFixed(1).replace('.',',')+'%)';}}}},
         scales:{x:{title:{display:true,text:'Hektare'},ticks:{callback:function(v){return v.toLocaleString('id-ID');}}}},
-        onClick:function(e,els){if(els&&els.length)show('lampLahanDetail',LH[els[0].index]);}}});
+        onClick:function(e,els){if(els&&els.length)show('lampLahanDetail',LH[els[0].index]);}}});}
+    if(b&&!done.b&&b.offsetParent!==null){done.b=1;
     new Chart(b,{type:'bar',data:{labels:['A. Pembubaran','B. Pemberesan','C. Pertanggungjawaban','D. Pajak, izin, lahan'],
       datasets:[{data:[6,12,5,5],backgroundColor:['#2F5597','#B08D57','#5B7DB8','#8C6A3F'],borderRadius:7,maxBarThickness:70}]},
       options:{maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.raw+' langkah';}}}},
         scales:{y:{beginAtZero:true,ticks:{stepSize:2},title:{display:true,text:'Jumlah langkah'}}},
-        onClick:function(e,els){if(els&&els.length)show('lampLangkahDetail',LK[els[0].index]);}}});
+        onClick:function(e,els){if(els&&els.length)show('lampLangkahDetail',LK[els[0].index]);}}});}
   }
+  var cur=0;function go(n){cur=(n+4)%4;blk.querySelectorAll('.lp-pane').forEach(function(p){p.hidden=(+p.getAttribute('data-pane')!==cur);});
+    blk.querySelectorAll('.lp-seg [data-lp]').forEach(function(x){x.setAttribute('aria-pressed',String(+x.getAttribute('data-lp')===cur));});
+    var nx=blk.querySelector('[data-lp-next]');if(nx)nx.textContent=cur===3?'↺ Kembali ke 1':'Berikutnya →';setTimeout(build,60);
+    try{var sg=blk.querySelector('.lp-seg');if(sg.getBoundingClientRect().top<0)blk.scrollIntoView({block:'start'});}catch(e){}}
+  blk.addEventListener('click',function(e){var t=e.target.closest('[data-lp]');if(t){go(+t.getAttribute('data-lp'));return;}if(e.target.closest('[data-lp-next]'))go(cur+1);});
   try{new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)build();});},{threshold:.02}).observe(blk);}catch(e){}
   document.addEventListener('click',function(){setTimeout(build,350);},true);window.addEventListener('hashchange',function(){setTimeout(build,350);});
 })();
