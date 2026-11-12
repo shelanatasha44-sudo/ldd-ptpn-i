@@ -10585,6 +10585,35 @@ html[data-theme="dark"] .chart{background:linear-gradient(180deg,rgba(255,255,25
 #wowStage .wow-box>.chart{border:0;box-shadow:none;background:none;padding:0}
 #igxPop:not(.show){opacity:0!important;transform:scale(.6) translateY(8px)!important;pointer-events:none!important;visibility:hidden!important}
 .wow-j{text-align:justify!important;text-justify:inter-word}
+.timeline{padding:60px 8px 16px!important;gap:0!important;scroll-snap-type:x proximity;border-radius:16px;border:1px solid rgba(176,141,87,.42);
+  background:radial-gradient(130% 90% at 50% 0%,rgba(255,255,255,.96),rgba(251,245,231,.62) 72%),linear-gradient(180deg,#fffdf8,#f7efdc);
+  box-shadow:inset 0 1px 0 #fff,inset 0 0 0 4px rgba(255,255,255,.45),0 14px 30px -18px rgba(20,36,72,.45)}
+html[data-theme="dark"] .timeline{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.015));border-color:rgba(214,178,106,.38);box-shadow:none}
+.timeline button:nth-child(8n+1){--tc:#1F3864;--tn:#1F7A6D}
+.timeline button:nth-child(8n+2){--tc:#1F7A6D;--tn:#C49237}
+.timeline button:nth-child(8n+3){--tc:#C49237;--tn:#8E2C3A}
+.timeline button:nth-child(8n+4){--tc:#8E2C3A;--tn:#5B3F8C}
+.timeline button:nth-child(8n+5){--tc:#5B3F8C;--tn:#2E7D4F}
+.timeline button:nth-child(8n+6){--tc:#2E7D4F;--tn:#2F6DA8}
+.timeline button:nth-child(8n+7){--tc:#2F6DA8;--tn:#C7692B}
+.timeline button:nth-child(8n+8){--tc:#C7692B;--tn:#1F3864}
+.timeline button{position:relative;margin:0 6px;overflow:visible;border-radius:12px!important;border-top:4px solid var(--tc)!important;scroll-snap-align:center;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,background .35s;animation:wowTl .7s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*70ms)}
+@keyframes wowTl{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.timeline button::before{content:"";position:absolute;left:50%;top:-42px;width:20px;height:20px;margin-left:-10px;border-radius:50%;z-index:2;
+  background:radial-gradient(circle at 35% 30%,#fff 0 16%,var(--tc) 62%);box-shadow:0 0 0 4px var(--card-hi,#fffdf8),0 0 0 5.5px var(--tc),0 8px 14px -4px var(--tc);transition:transform .35s}
+.timeline button::after{content:"";position:absolute;left:50%;top:-34px;width:calc(100% + 12px);height:5px;border-radius:5px;z-index:1;
+  background:linear-gradient(90deg,var(--tc),var(--tn));opacity:.25;transition:opacity .5s}
+.timeline button:last-child::after{display:none}
+.timeline button.wow-done::after{opacity:1}
+.timeline button .d{color:var(--tc)!important}
+html[data-theme="dark"] .timeline button .d{color:color-mix(in srgb,var(--tc) 50%,#fff)!important}
+.timeline button:hover{transform:translateY(-3px);box-shadow:0 14px 24px -14px var(--tc)}
+.timeline button[aria-pressed="true"]{border-color:var(--tc)!important;transform:translateY(-4px);box-shadow:0 18px 28px -14px var(--tc)!important;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--tc) 15%,var(--card-hi,#fff)),var(--card-hi,#fffdf8))!important}
+.timeline button[aria-pressed="true"]::before{transform:scale(1.35);animation:wowTlPing 1.8s ease-out infinite}
+@keyframes wowTlPing{0%{box-shadow:0 0 0 4px var(--card-hi,#fffdf8),0 0 0 5.5px var(--tc),0 0 0 6px color-mix(in srgb,var(--tc) 60%,transparent)}100%{box-shadow:0 0 0 4px var(--card-hi,#fffdf8),0 0 0 5.5px var(--tc),0 0 0 18px transparent}}
+@media (prefers-reduced-motion: reduce){.timeline button,.timeline button[aria-pressed="true"]::before{animation:none}}
 @media print{.wow-live{display:none}}
 </style>
 <script id="wow-post">
@@ -10627,9 +10656,10 @@ html[data-theme="dark"] .chart{background:linear-gradient(180deg,rgba(255,255,25
     else{if(stage&&stage.classList.contains('on'))closeStage();else openStage(box);}},true);
   // rata kanan kiri untuk teks yang semula rata kiri
   var jt=null;function just(){jt=null;document.querySelectorAll('p,li,td,dd,blockquote,figcaption,.igx-popB,.igx-detail,.igx-popRow,.hint,.small-note').forEach(function(el){if(el.classList.contains('wow-j')||el.closest('.wow-live,button,nav'))return;var ta=getComputedStyle(el).textAlign;if(ta==='left'||ta==='start')el.classList.add('wow-j');});}
-  function justQ(){if(!jt)jt=setTimeout(just,250);}
+  function tl(){document.querySelectorAll('.timeline').forEach(function(t){var bs=t.querySelectorAll('button'),on=-1;bs.forEach(function(b,i){b.style.setProperty('--i',i);if(b.getAttribute('aria-pressed')==='true')on=i;});bs.forEach(function(b,i){b.classList.toggle('wow-done',i<on);});});}
+  function justQ(){try{tl();}catch(e){}if(!jt)jt=setTimeout(just,250);}
   try{new MutationObserver(justQ).observe(document.body,{childList:true,subtree:true});}catch(e){}
-  window.addEventListener('hashchange',justQ);document.addEventListener('click',function(){setTimeout(justQ,400);},true);window.addEventListener('scroll',justQ,{passive:true});setInterval(justQ,2500);
+  window.addEventListener('hashchange',justQ);document.addEventListener('click',function(){setTimeout(justQ,80);setTimeout(justQ,400);},true);window.addEventListener('scroll',justQ,{passive:true});setInterval(justQ,2500);
   // batang progres mengisi ulang saat terlihat
   function bars(){if(!('IntersectionObserver' in window)||RM)return;var bo=new IntersectionObserver(function(es){es.forEach(function(e){
       var el=e.target;if(e.isIntersecting&&!el._wowB){el._wowB=1;var w=el.style.width||getComputedStyle(el).width;var had=el.style.width;el.style.width='0';requestAnimationFrame(function(){requestAnimationFrame(function(){el.style.width=w;setTimeout(function(){el.style.width=had;},1800);});});}});},{threshold:.5});
