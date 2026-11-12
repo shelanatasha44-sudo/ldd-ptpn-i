@@ -6262,7 +6262,7 @@ section:not(.ldd-locked) .ldd-tablock{display:none!important}
         <a href="#igx-jalan" data-igx-jump>2.8 Peta Jalan</a>
         <a href="#igx-30" data-igx-jump>2.9 30 Hari Pertama</a>
         <a href="#igx-dok" data-igx-jump>2.10 Kualifikasi</a>
-        <a href="#igx-lini" data-igx-jump>2.11 Lini Masa</a>
+        <a href="#igx-lini" data-igx-jump>2.11 Lini Masa</a> <a href="#igx-lampiran" data-igx-jump>2.12 Lampiran</a>
       </div>
     </div>
 
@@ -6625,6 +6625,55 @@ section:not(.ldd-locked) .ldd-tablock{display:none!important}
       <p class="small" style="margin-top:0">Klik pada setiap tahun di bawah ini (atau gunakan tombol navigasi) untuk membaca kejadian fakta, masalah hukum, dan dasar pasalnya.</p>
       <div class="timeline" data-target="igtDetail" role="group" aria-label="Lini masa IGT"></div>
       <div class="detail sheet" id="igtDetail" aria-live="polite"></div>
+    </div>
+    <!-- 2.12 LAMPIRAN LDD -->
+    <div class="sub-block" id="igx-lampiran">
+      <div class="sub-header">
+        <div class="sub-header-left">
+          <span class="sub-step-badge">Sub-Bagian 2.12</span>
+          <h3 class="sub-title">Lampiran LDD: Status Tanah, Prosedur Pembubaran, dan Kerugian BUMN</h3>
+        </div>
+        <span class="small">Sumber: Lampiran LDD IGT 12 November 2026 (Slide 21 sampai 23 PPT)</span>
+      </div>
+      <p>Lampiran LDD menjawab tiga pertanyaan dari rapat sebelumnya. Lahan mana yang paling siap dimohonkan HGU, bagaimana urutan langkah sejak pembubaran sampai likuidasi selesai, dan bagaimana kedudukan pengambil keputusan bila timbul kerugian. Lampiran disusun hanya berdasarkan dokumen yang diterima sampai 6 November 2026, sehingga keadaan lahan perlu dipastikan di lapangan.</p>
+
+      <h4 class="igx-h4">Lampiran I · Empat kelompok lahan, dari yang paling siap <span class="small">(klik batang)</span></h4>
+      <div class="chart igx-chart" style="height:250px"><canvas id="cLampLahan" role="img" aria-label="Luas empat kelompok lahan menurut urutan kesiapan permohonan HGU"></canvas></div>
+      <div class="igx-detail" id="lampLahanDetail" aria-live="polite">Seluruh 4.266,00 ha sudah dibayar ganti ruginya. Klik batang untuk membaca penilaian tiap kelompok.</div>
+
+      <h4 class="igx-h4">Lampiran II · 28 langkah dalam empat bagian <span class="small">(klik batang)</span></h4>
+      <div class="lp-rail" role="group" aria-label="Empat tanggal acuan">
+        <div class="lp-node" data-l="P"><b>Keputusan pembubaran</b><span>Hari KPPS pembubaran ditandatangani (langkah 1). Akta dan pemberitahuan kepada Menteri dihitung 30 hari sejak tanggal ini.</span></div>
+        <div class="lp-node" data-l="U"><b>Pengumuman pembubaran</b><span>Diumumkan kepada kreditor di surat kabar dan Berita Negara (langkah 4). Tagihan kreditor diterima 60 hari sejak tanggal ini.</span></div>
+        <div class="lp-node" data-l="R"><b>Pengumuman rencana pembagian</b><span>Rencana pembagian kekayaan diumumkan (langkah 12). Keberatan kreditor diterima 60 hari sejak tanggal ini.</span></div>
+        <div class="lp-node" data-l="T"><b>Pertanggungjawaban diterima</b><span>Pemegang saham menerima pertanggungjawaban likuidator (langkah 20). Hasil akhir diberitahukan kepada Menteri 30 hari sejak tanggal ini.</span></div>
+      </div>
+      <div class="chart igx-chart" style="height:230px"><canvas id="cLampLangkah" role="img" aria-label="Jumlah langkah pada setiap bagian prosedur"></canvas></div>
+      <div class="igx-detail" id="lampLangkahDetail" aria-live="polite">Dua masa tunggu 60 hari bagi kreditor ditetapkan undang-undang dan tidak dapat dipersingkat. Klik batang untuk melihat isi tiap bagian.</div>
+
+      <h4 class="igx-h4">Apabila likuidator belum selesai dalam dua tahun</h4>
+      <div class="table-wrap"><table class="igx-t lp-t">
+        <thead><tr><th>Hal</th><th>Akibat setelah dua tahun</th><th>Dasar hukum</th></tr></thead>
+        <tbody>
+          <tr><td><b>Keputusan pembubaran</b></td><td><span class="lp-ok">Tetap berlaku</span> Pembubaran tidak batal dan IGT tidak kembali ke keadaan sebelum dibubarkan.</td><td>Pasal 142 UU PT; Pasal 12 Permenkum 49/2025</td></tr>
+          <tr><td><b>Status IGT</b></td><td><span class="lp-ok">Tetap berlaku</span> IGT tetap berbadan hukum dengan sebutan "dalam likuidasi" sampai pertanggungjawaban likuidator diterima.</td><td>Pasal 142 dan Pasal 143 UU PT</td></tr>
+          <tr><td><b>Penunjukan likuidator</b></td><td><span class="lp-ok">Tetap berlaku</span> Likuidator tetap berwenang meneruskan pemberesan, dan dapat diganti bila tidak dapat bekerja.</td><td>Pasal 142 dan Pasal 151 ayat (1) UU PT</td></tr>
+          <tr><td><b>Pengumuman dan pemberitahuan</b></td><td><span class="lp-ok">Tetap berlaku</span> Tidak perlu diulang.</td><td>Pasal 147 ayat (1) UU PT</td></tr>
+          <tr><td><b>Tagihan kreditor</b></td><td><span class="lp-ok">Bukan batas kerja likuidator</span> Jangka dua tahun adalah batas bagi kreditor yang terlambat menagih melalui pengadilan negeri.</td><td>Pasal 150 ayat (2) UU PT</td></tr>
+          <tr><td><b>Lahan</b></td><td><span class="lp-hit">Terdampak</span> Penyerahan kepada PTPN I dan permohonan HGU tertunda sampai akta penyerahan dibuat. Lahan yang tidak dikuasai makin terbuka terhadap okupasi.</td><td>Pasal 149 ayat (1) huruf d UU PT</td></tr>
+        </tbody>
+      </table></div>
+
+      <h4 class="igx-h4">Lampiran III · Kerugian BUMN dan perlindungan pengambil keputusan</h4>
+      <div class="igx-g3">
+        <div class="sheet"><span class="igx-q">Pasal 97 ayat (5) UU PT</span><h3>Empat syarat perlindungan Direksi</h3><p>Direksi tidak bertanggung jawab atas kerugian bila tidak bersalah atau lalai, mengurus dengan itikad baik dan hati-hati, tidak mempunyai benturan kepentingan, dan sudah mengambil tindakan untuk mencegah kerugian.</p></div>
+        <div class="sheet"><span class="igx-q">Pasal 4B dan Pasal 9F UU BUMN</span><h3>Kerugian perusahaan, bukan kesalahan pribadi</h3><p>Keuntungan atau kerugian BUMN adalah keuntungan atau kerugian BUMN itu sendiri. Kerugian dari keputusan yang diambil dengan benar tidak menjadi kesalahan pribadi.</p></div>
+        <div class="sheet"><span class="igx-q">Pasal 32 PP 38/2026</span><h3>Ukuran yang sama bagi Direksi Persero</h3><p>Direksi bertanggung jawab pribadi bila bersalah atau lalai, dan dibebaskan bila empat syarat yang sama terbukti.</p></div>
+        <div class="sheet"><span class="igx-q">Pasal 165 PP 38/2026</span><h3>Cut loss</h3><p>Perusahaan dapat menghentikan kerugian atas aset untuk mencegah kerugian yang lebih besar. Syaratnya ada analisis dengan kertas kerja, penurunan nilai bukan karena kesalahan pelaksananya, dan tidak ada benturan kepentingan.</p></div>
+        <div class="sheet"><span class="igx-q">Peraturan BP BUMN 1/2026</span><h3>Tata cara hapus buku dan hapus tagih</h3><p>Mengatur persetujuan, dokumentasi, dan pelaporan atas penghapusan aset dan tagihan, termasuk pelaksanaan cut loss.</p></div>
+        <div class="sheet"><span class="igx-q">Pasal 2 dan Pasal 3 UU Tipikor</span><h3>Unsur pidana tidak terpenuhi</h3><p>Keputusan oleh pihak yang berwenang, sesuai prosedur, dan tanpa benturan kepentingan tidak memenuhi unsur pidana, walaupun hasilnya tidak menguntungkan.</p></div>
+      </div>
+      <p class="hint">Lampiran ini murni kajian hukum. Hitungan nilai, biaya, dan pajak menjadi bagian tim keuangan.</p>
     </div>
 
     <p class="small" style="margin-top:18px">Sumber: Draf 2 Legal Due Diligence PT Industri Gula Tinanggea, data per 6 November 2026 (batas akhir pemenuhan data), diserahkan 12 November 2026 (191 halaman dwibahasa). Draf 2 menggantikan seluruh versi sebelumnya; dokumen yang diterima setelah 6 November 2026 dinilai dalam Ver 3. Rahasia dan istimewa.</p>
@@ -10149,7 +10198,7 @@ section:not(.ldd-locked) .ldd-tablock{display:none!important}
       kpis: [[100, 0, '', '%', 'tahap penyusunan draf'], [58.7, 1, '', '%', 'skor DRL rata-rata'], [234, 0, '', '', 'dokumen wajib dalam DRL'], [3, 0, '', '', 'entitas: IGT, RNT, RNM']]
     },
     igt: {
-      labels: ['Angka Kunci', 'Tiga Jawaban', 'Pendapat Hukum', 'Lahan', 'Korporasi', 'Temuan & Risiko', 'Opsi', 'Peta Jalan', '30 Hari Pertama', 'Kualifikasi', 'Lini Masa'],
+      labels: ['Angka Kunci', 'Tiga Jawaban', 'Pendapat Hukum', 'Lahan', 'Korporasi', 'Temuan & Risiko', 'Opsi', 'Peta Jalan', '30 Hari Pertama', 'Kualifikasi', 'Lini Masa', 'Lampiran'],
       title: 'IGT <em>dapat dilikuidasi</em>, kuncinya ada di lahan',
       sub: 'Klasifikasi penguasaan 2026 atas ±4.266,74 ha lahan hasil ganti rugi. Arahkan kursor ke tiap bagian cincin.',
       center: {k: 'LAHAN IGT', v: 4266.74, d: 2, suf: '', c: ['hektare · 0 ha', 'bersertifikat']},
@@ -10618,6 +10667,19 @@ html[data-theme="dark"] .timeline button .d{color:#f3e3bd!important}
 .timeline button[aria-pressed="true"]{background-image:linear-gradient(115deg,transparent 40%,rgba(243,227,189,.22) 50%,transparent 60%),linear-gradient(160deg,#243f70 0%,#16284b 60%,#0f1b38 100%)!important;background-size:260% 100%,100% 100%!important;animation:wowTlSheen 3.6s ease-in-out infinite}
 @keyframes wowTlSheen{0%,55%{background-position:130% 0,0 0}100%{background-position:-60% 0,0 0}}
 @media (prefers-reduced-motion: reduce){.timeline button,.timeline button[aria-pressed="true"],.timeline button[aria-pressed="true"]::before,.timeline button.wow-done::after{animation:none}}
+.lp-rail{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(170px,1fr);overflow-x:auto;padding:62px 6px 12px;margin:6px 0 14px}
+.lp-node{position:relative;margin:0 7px;padding:14px 14px 12px;border-radius:14px;border:1px solid rgba(176,141,87,.4);background:linear-gradient(180deg,#fffefb,#fbf5e6);box-shadow:0 10px 22px -18px rgba(20,36,72,.6);transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s}
+.lp-node:hover{transform:translateY(-4px);box-shadow:0 20px 30px -20px rgba(20,36,72,.7)}
+html[data-theme="dark"] .lp-node{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.02))}
+.lp-node b{display:block;font:700 .92rem "Plus Jakarta Sans",sans-serif;color:var(--navy);margin-bottom:6px}
+.lp-node span{display:block;font-size:.8rem;line-height:1.45;color:var(--muted)}
+.lp-node::before{content:attr(data-l);position:absolute;left:50%;top:-50px;width:34px;height:34px;margin-left:-17px;border-radius:50%;display:grid;place-items:center;z-index:2;font:700 14px "Plus Jakarta Sans",sans-serif;color:#f3e3bd;background:radial-gradient(circle at 32% 26%,#3b5a94 0,#1f3864 55%,#0f1b38 100%);box-shadow:0 0 0 3px #fffdf8,0 0 0 5px #d4b373,0 10px 16px -8px rgba(15,27,56,.8)}
+.lp-node::after{content:"";position:absolute;left:50%;top:-34px;width:calc(100% + 14px);height:3px;z-index:1;background:linear-gradient(90deg,#8a6a35,#e7cd8f,#fff3cf,#e7cd8f,#8a6a35);background-size:220% 100%;animation:wowTlFlow 3.2s linear infinite}
+.lp-node:last-child::after{display:none}
+.lp-ok,.lp-hit{display:inline-block;margin-right:6px;padding:2px 9px;border-radius:99px;font:700 .72rem "Plus Jakarta Sans",sans-serif;white-space:nowrap}
+.lp-ok{background:#e3f0e7;color:#1f6b3f}.lp-hit{background:#f7e2e0;color:#8e2c3a}
+html[data-theme="dark"] .lp-ok{background:rgba(92,199,149,.18);color:#8fe0b8}html[data-theme="dark"] .lp-hit{background:rgba(229,115,115,.18);color:#f0a3a3}
+@media (prefers-reduced-motion: reduce){.lp-node::after{animation:none}}
 @media print{.wow-live{display:none}}
 </style>
 <script id="wow-post">
@@ -10671,6 +10733,37 @@ html[data-theme="dark"] .timeline button .d{color:#f3e3bd!important}
   function go(){try{just();}catch(e){}try{scan();}catch(e){}try{badge();}catch(e){}try{bars();}catch(e){}}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go();
   setTimeout(go,1500);
+})();
+</script>
+<script id="lamp-js">
+(function(){
+  var blk=document.getElementById('igx-lampiran');if(!blk)return;var built=false;
+  var LH=[['971,78 ha (22,8%) dalam proses sertifikasi HGU oleh PTPN I.','Dapat diajukan, urutan pertama. Permohonan HGU sudah diajukan PTPN I dan sedang berjalan. Desa Watumokala berada pada tahap pengukuran, sedangkan peta bidang Desa Potoro sudah terbit.'],
+    ['23,74 ha (0,6%) kerja sama dengan PT Baula Petra Buana.','Dapat diajukan, urutan kedua. Lahan termasuk areal yang ganti ruginya sudah dibayar dan dipakai hanya berdasarkan perjanjian pemanfaatan. Permohonan diajukan setelah berakhirnya perjanjian dibuktikan secara tertulis.'],
+    ['312,83 ha (7,3%) diokupasi PT CAM.','Dapat diajukan setelah okupasi selesai, urutan ketiga. Ganti rugi sudah dibayar, tetapi lahan ditanami pihak lain tanpa izin, sedangkan permohonan mensyaratkan tanah dikuasai pemohon dan bebas sengketa.'],
+    ['2.957,65 ha (69,3%) belum teridentifikasi di lapangan.','Belum dapat diajukan, urutan terakhir. Letak, batas, dan penguasaannya belum diketahui, sehingga permohonan baru dapat diajukan setelah lahan dipastikan di lapangan.']];
+  var LK=[['Bagian A, keputusan pembubaran dan pemberitahuan (6 langkah).','KPPS pembubaran dan penunjukan likuidator, akta, pengumuman kepada kreditor, dan pemberitahuan kepada Menteri. Tanggal P dan U ada di bagian ini.'],
+    ['Bagian B, pemberesan (12 langkah).','Pencatatan kekayaan dan utang, verifikasi tagihan, pelunasan pajak, pengumuman rencana pembagian, pembayaran kreditor, lalu penyerahan hak keperdataan atas lahan kepada PTPN I dengan akta. Tanggal R ada di bagian ini.'],
+    ['Bagian C, pertanggungjawaban dan berakhirnya badan hukum (5 langkah).','Laporan akhir likuidator, penerimaan pertanggungjawaban, pemberitahuan hasil akhir kepada Menteri, dan pencatatan berakhirnya status badan hukum. Tanggal T ada di bagian ini.'],
+    ['Bagian D, pajak, perizinan, dan lahan (5 langkah).','Penghapusan NPWP, penegasan tidak ada karyawan dan izin yang aktif, permohonan HGU oleh PTPN I, serta pemanfaatan lahan setelah hak diberikan.']];
+  function show(id,a){var d=document.getElementById(id);if(!d)return;d.innerHTML='<b>'+a[0]+'</b> '+a[1];d.classList.remove('pop');void d.offsetWidth;d.classList.add('pop');}
+  function nf(v){return v.toLocaleString('id-ID',{minimumFractionDigits:2,maximumFractionDigits:2});}
+  function build(){
+    if(built||typeof Chart==='undefined')return;var a=document.getElementById('cLampLahan'),b=document.getElementById('cLampLangkah');
+    if(!a||!b||a.offsetParent===null)return;built=true;
+    new Chart(a,{type:'bar',data:{labels:['1. Dalam proses sertifikasi HGU','2. Kerja sama PT Baula','3. Diokupasi PT CAM','4. Belum teridentifikasi'],
+      datasets:[{data:[971.78,23.74,312.83,2957.65],backgroundColor:['#2F5597','#5B7DB8','#B08D57','#8E97AB'],borderRadius:7,maxBarThickness:34}]},
+      options:{indexAxis:'y',maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return nf(c.raw)+' ha ('+(c.raw/4266*100).toFixed(1).replace('.',',')+'%)';}}}},
+        scales:{x:{title:{display:true,text:'Hektare'},ticks:{callback:function(v){return v.toLocaleString('id-ID');}}}},
+        onClick:function(e,els){if(els&&els.length)show('lampLahanDetail',LH[els[0].index]);}}});
+    new Chart(b,{type:'bar',data:{labels:['A. Pembubaran','B. Pemberesan','C. Pertanggungjawaban','D. Pajak, izin, lahan'],
+      datasets:[{data:[6,12,5,5],backgroundColor:['#2F5597','#B08D57','#5B7DB8','#8C6A3F'],borderRadius:7,maxBarThickness:70}]},
+      options:{maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.raw+' langkah';}}}},
+        scales:{y:{beginAtZero:true,ticks:{stepSize:2},title:{display:true,text:'Jumlah langkah'}}},
+        onClick:function(e,els){if(els&&els.length)show('lampLangkahDetail',LK[els[0].index]);}}});
+  }
+  try{new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)build();});},{threshold:.02}).observe(blk);}catch(e){}
+  document.addEventListener('click',function(){setTimeout(build,350);},true);window.addEventListener('hashchange',function(){setTimeout(build,350);});
 })();
 </script>
 </body>
